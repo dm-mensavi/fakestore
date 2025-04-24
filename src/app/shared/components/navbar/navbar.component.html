@@ -3,7 +3,12 @@
     <a routerLink="/" class="text-xl font-bold">E-Commerce Store</a>
     <div class="space-x-4">
       <a routerLink="/products" class="hover:text-gray-300">Products</a>
-      <a routerLink="/cart" class="hover:text-gray-300">Cart</a>
+      <a routerLink="/cart" class="hover:text-gray-300 relative">
+        Cart
+        <span *ngIf="cartItemCount > 0" class="absolute -top-2 -right-4 bg-red-500 text-white text-xs rounded-full px-2 py-1">
+          {{ cartItemCount }}
+        </span>
+      </a>
     </div>
   </div>
 </nav>

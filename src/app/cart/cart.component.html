@@ -1,1 +1,97 @@
-<p>cart works!</p>
+<div class="py-6">
+  <h2 class="text-2xl font-bold mb-6">Shopping Cart</h2>
+
+  <!-- Empty Cart Message -->
+  <div *ngIf="cartItems.length === 0" class="text-center text-gray-600">
+    Your cart is empty. <a routerLink="/products" class="text-blue-500 hover:underline">Continue shopping</a>.
+  </div>
+
+  <!-- Cart Items -->
+  <div *ngIf="cartItems.length > 0">
+    <div class="overflow-x-auto">
+      <table class="min-w-full border rounded-lg">
+        <thead class="bg-gray-100">
+          <tr>
+            <th class="px-4 py-2 text-left">Product</th>
+            <th class="px-4 py-2 text-left">Price</th>
+            <th class="px-4 py-2 text-left">Quantity</th>
+            <th class="px-4 py-2 text-left">Subtotal</th>
+            <th class="px-4 py-2 text-left">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of cartItems" class="border-t">
+            <td class="px-4 py-2 flex items-center space-x-4">
+              <img [src]="item.product.image" alt="{{ item.product.title }}" class="w-16 h-16 object-cover" />
+              <span>{{ item.product.title }}</span>
+            </td>
+            <td class="px-4 py-2">${{ item.product.price }}</td>
+            <td class="px-4 py-2">
+              <div class="flex items-center space-x-2">
+                <button (click)="updateQuantity(item, item.quantity - 1)"
+                  class="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300">
+                  -
+                </button>
+                <span>{{ item.quantity }}</span>
+                <button (click)="updateQuantity(item, item.quantity + 1)"
+                  class="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300">
+                  +
+                </button>
+              </div>
+            </td>
+            <td class="px-4 py-2">${{ (item.product.price * item.quantity).toFixed(2) }}</td>
+            <td class="px-4 py-2">
+              <button (click)="removeItem(item.product.id)" class="text-red-500 hover:text-red-700">
+                Remove
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Cart Total -->
+    <div class="mt-6 flex justify-end">
+      <div class="text-xl font-semibold">
+        Total: ${{ total.toFixed(2) }}
+      </div>
+    </div>
+
+    <!-- Checkout Form -->
+    <div class="mt-8">
+      <h3 class="text-xl font-semibold mb-4">Checkout</h3>
+      <form [formGroup]="checkoutForm" (ngSubmit)="onCheckout()" class="space-y-4">
+        <div>
+          <label for="name" class="block text-gray-700 font-medium mb-2">Name</label>
+          <input id="name" formControlName="name" type="text" class="border rounded-lg p-2 w-full"
+            [ngClass]="{'border-red-500': checkoutSubmitted && checkoutForm.get('name')?.invalid}" />
+          <div *ngIf="checkoutSubmitted && checkoutForm.get('name')?.invalid" class="text-red-500 text-sm mt-1">
+            Name is required.
+          </div>
+        </div>
+        <div>
+          <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
+          <input id="email" formControlName="email" type="email" class="border rounded-lg p-2 w-full"
+            [ngClass]="{'border-red-500': checkoutSubmitted && checkoutForm.get('email')?.invalid}" />
+          <div *ngIf="checkoutSubmitted && checkoutForm.get('email')?.invalid" class="text-red-500 text-sm mt-1">
+            <span *ngIf="checkoutForm.get('email')?.errors?.['required']">Email is required.</span>
+            <span *ngIf="checkoutForm.get('email')?.errors?.['email']">Please enter a valid email.</span>
+          </div>
+        </div>
+        <div>
+          <label for="address" class="block text-gray-700 font-medium mb-2">Address</label>
+          <input id="address" formControlName="address" type="text" class="border rounded-lg p-2 w-full"
+            [ngClass]="{'border-red-500': checkoutSubmitted && checkoutForm.get('address')?.invalid}" />
+          <div *ngIf="checkoutSubmitted && checkoutForm.get('address')?.invalid" class="text-red-500 text-sm mt-1">
+            Address is required.
+          </div>
+        </div>
+        <div class="flex justify-end">
+          <button type="submit" class="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600">
+            Place Order
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
