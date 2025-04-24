@@ -1,0 +1,37 @@
+<div class="py-6">
+  <!-- Filters -->
+  <div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:space-x-4">
+    <div class="mb-4 sm:mb-0">
+      <label for="category" class="block text-gray-700 font-medium mb-2">Filter by Category:</label>
+      <select
+        id="category"
+        [(ngModel)]="selectedCategory"
+        (ngModelChange)="applyFilters()"
+        class="border rounded-lg p-2 w-full sm:w-48"
+      >
+        <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+      </select>
+    </div>
+    <div>
+      <label for="search" class="block text-gray-700 font-medium mb-2">Search Products:</label>
+      <input
+        id="search"
+        [(ngModel)]="searchTerm"
+        (ngModelChange)="applyFilters()"
+        type="text"
+        placeholder="Search by title..."
+        class="border rounded-lg p-2 w-full sm:w-64"
+      />
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="flex justify-center items-center h-64">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+
+  <!-- Product Grid -->
+  <div *ngIf="!loading" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    <app-product-card *ngFor="let product of filteredProducts" [product]="product"></app-product-card>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+<footer class="bg-gray-800 text-white py-6">
+  <div class="container mx-auto px-4">
+    <div class="flex flex-col md:flex-row justify-between items-center">
+      <!-- Left Section: Brand -->
+      <div class="mb-4 md:mb-0">
+        <a routerLink="/" class="text-lg font-semibold">E-Commerce Store</a>
+      </div>
+      <!-- Middle Section: Links -->
+      <div class="flex space-x-6 mb-4 md:mb-0">
+        <a routerLink="/products" class="hover:text-gray-300">Products</a>
+        <a routerLink="/cart" class="hover:text-gray-300">Cart</a>
+        <a href="#" class="hover:text-gray-300">About Us</a>
+        <a href="#" class="hover:text-gray-300">Contact</a>
+      </div>
+      <!-- Right Section: Social Icons (Optional) -->
+      <div class="flex space-x-4">
+        <a href="#" class="hover:text-gray-300">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M24 4.56c-.89.39-1.84.65-2.84.77a4.92 4.92 0 002.16-2.72c-.95.57-2 .98-3.12 1.2a4.9 4.9 0 00-8.34 4.47A13.9 13.9 0 011.67 3.15a4.9 4.9 0 001.52 6.54c-.79-.02-1.53-.24-2.17-.61v.06a4.9 4.9 0 003.94 4.8c-.71.19-1.46.23-2.18.08a4.9 4.9 0 004.58 3.4A9.84 9.84 0 010 19.54a13.9 13.9 0 007.55 2.21c9.06 0 14.01-7.5 14.01-14.01 0-.21 0-.42-.02-.63A10 10 0 0024 4.56z"/>
+          </svg>
+        </a>
+        <a href="#" class="hover:text-gray-300">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2.04c-5.52 0-10 4.48-10 10s4.48 10 10 10 10-4.48 10-10-4.48-10-10-10zm-5 15.66v-7.32h2.44v7.32H7zm1.22-8.38c-.78 0-1.41-.63-1.41-1.41s.63-1.41 1.41-1.41 1.41.63 1.41 1.41-.63 1.41-1.41 1.41zm7.34 8.38h-2.44v-3.91c0-.93-.33-1.56-1.16-1.56-.63 0-1.01.42-1.18.82-.06.14-.08.34-.08.54v4.11h-2.44v-7.32h2.44v.96c.34-.53.94-.86 1.61-.86 1.18 0 2.07.79 2.07 2.48v4.74z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+    <div class="text-center mt-4 text-gray-400">
+      &copy; {{ currentYear }} E-Commerce Store. All rights reserved.
+    </div>
+  </div>
+</footer>
